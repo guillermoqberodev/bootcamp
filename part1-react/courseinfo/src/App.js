@@ -1,4 +1,6 @@
 import './App.css';
+import {useState} from "react";
+
 
 const Title = ({course})=>{
   return (
@@ -15,6 +17,10 @@ const Exercice = ({numberExcercice, parts})=>{
   )
 }
 
+const Contador = ({number}) => {
+  return <h1>{number}</h1>
+}
+
 const App = () => {
   const course = 'Half Stack application development'
   const part1 = 'Fundamentals of React'
@@ -24,8 +30,32 @@ const App = () => {
   const part3 = 'State of a component'
   const exercises3 = 14
 
+  const [contador, setContador] = useState(0)
+
+  const incremetal = (e)=>{
+    setContador((valorAnterior)=>{
+        if(e.target.className === "incre"){
+          return valorAnterior + 1
+        }else if (e.target.className === "decre"){
+          return valorAnterior - 1
+        }
+    })
+  }
   return (
     <div>
+      <Contador number={contador} />
+      <button
+      className='incre'
+        onClick={incremetal}
+      >
+        Incrementar
+      </button>
+      <button
+        className='decre'
+        onClick={incremetal}
+      >
+        Decrementar
+      </button>
       <Title course={course}/>
       <Exercice parts={part1} numberExcercice={exercises1}/>
       <Exercice parts={part2} numberExcercice={exercises2}/>
